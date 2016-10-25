@@ -179,7 +179,17 @@ public class Cipher {
 	 * @return returns the decrypted cipherText.
 	 */
 	public static String vigenereCipherDecrypt(String cipherText, String code, String alphabet) {
-		return "";
+		String decryptedText = "";
+		
+		for(int i = 0; i < cipherText.length(); i++) {
+			// get letter at i in cipher Text
+			
+			// find the index of that letter in alphabet
+			
+			// 
+		}
+		
+		return decryptedText;
 	}
 
 	public static String vigenereCipherDecrypt(String cipherText, String code) {
