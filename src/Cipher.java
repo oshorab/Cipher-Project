@@ -7,11 +7,17 @@ import java.io.*;
 public class Cipher {
 	public static void main(String[] args) {
 
-		String sahil = "apple banana jgvj bhjbh      fool";
+		// String sahil = "apple banana jgvj bhjbh fool";
+		String code = "code";
+		String plainText = "i like turtles";
+		String cipherText = "k:omms!xwFwpgG";
+		System.out.println(vigenereCipherEncrypt(plainText, code, ALPHABET));
 
-		System.out.println(Arrays.toString(getwords(sahil)));
+		System.out.println(vigenereCipherDecrypt(cipherText, code, ALPHABET));
 
-		System.out.println(isEnglish(sahil));
+		// System.out.println(Arrays.toString(getwords(sahil)));
+
+		// System.out.println(isEnglish(sahil));
 
 		// System.out.println(rotationCipherEncrypt("Hello Sahil",7,ALPHABET));
 		// System.out.println();
@@ -40,17 +46,7 @@ public class Cipher {
 		String newText = "";
 
 		for (int i = 0; i < plainText.length(); i++) {
-			int index = alphabet.indexOf(plainText.substring(i, i + 1)); // substring
-																			// to
-																			// get
-																			// letter
-																			// in
-																			// plaintext,
-																			// indexOf
-																			// to
-																			// get
-																			// its
-																			// #
+			int index = alphabet.indexOf(plainText.substring(i, i + 1));
 
 			index += shiftAmount; // add shift amount to index
 
@@ -141,19 +137,17 @@ public class Cipher {
 			String codeLetter = code.substring(nextCodeLetter, nextCodeLetter + 1);
 			nextCodeLetter++;
 
-			if (nextCodeLetter > code.length()-1) {
+			if (nextCodeLetter > code.length() - 1) {
 				nextCodeLetter = 0;
 			}
 
 			int shiftIndex = alphabet.indexOf(codeLetter);
-			
-			if(shiftIndex >= alphabet.length()) {
+
+			if (shiftIndex >= alphabet.length()) {
 				shiftIndex = shiftIndex - alphabet.length();
 			}
 			// shift plainLetter index by that amount
 			indexPlainLttr += shiftIndex;
-			
-			
 
 			// use substring to get that encoded letter out of alphabet
 			// add it into your encryptedText output
@@ -177,18 +171,38 @@ public class Cipher {
 	 * @param code
 	 *            the decryption key
 	 * @return returns the decrypted cipherText.
-	 */
+	 */		// Sahil Altekar helped me think of the logic of this method
 	public static String vigenereCipherDecrypt(String cipherText, String code, String alphabet) {
 		String decryptedText = "";
-		
-		for(int i = 0; i < cipherText.length(); i++) {
+		int nextCodeletter = 0;
+
+		for (int i = 0; i < cipherText.length(); i++) {
 			// get letter at i in cipher Text
-			
+			String cipherLttr = cipherText.substring(i, i + 1);
+
 			// find the index of that letter in alphabet
-			
-			// 
+			int indexCipherLttr = alphabet.indexOf(cipherLttr);
+
+			// get code letter from code with index i
+			String CodeLttr = code.substring(nextCodeletter, nextCodeletter + 1);
+			nextCodeletter++;
+
+			if (nextCodeletter > code.length() - 1) {
+				nextCodeletter = 0;
+			}
+
+			int shiftIndex = alphabet.indexOf(CodeLttr);
+
+			if (shiftIndex < 0) {
+				shiftIndex = shiftIndex - alphabet.length();
+			}
+
+			indexCipherLttr -= shiftIndex;
+
+			decryptedText = alphabet.substring(indexCipherLttr, indexCipherLttr + 1);
+
 		}
-		
+
 		return decryptedText;
 	}
 
@@ -280,6 +294,22 @@ public class Cipher {
 			words[i] = word.trim();
 		}
 		return words;
+	}
+
+	public static String vigenereCipherCrackThreeLetter(String cipher, String alphabet) {
+		return vigenereCipherCrack(cipher, 3, alphabet);
+	}
+
+	private static String vigenereCipherCrack(String text, int codeLength, String alphabet) {
+		
+	}
+
+	private static String findCodeLetter(String group, String alphabet) {
+
+	}
+
+	private static String getEveryNLetter(String text, int index, int codeLength) {
+
 	}
 
 }
